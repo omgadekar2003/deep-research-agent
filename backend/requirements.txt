@@ -1,0 +1,29 @@
+
+
+# Core
+python-dotenv==1.0.1
+pydantic==2.10.4
+pydantic-settings==2.7.0
+
+# LLM providers
+google-generativeai==0.8.3
+
+# Search providers
+tavily-python==0.5.0
+
+# Web
+httpx==0.28.1
+beautifulsoup4==4.12.3
+lxml==5.3.0
+
+# PDF
+pypdf==5.1.0
+
+# LangGraph
+langgraph==0.2.60
+langgraph-checkpoint-sqlite==2.0.1
+langchain-core==0.3.28
+aiosqlite==0.20.0
+
+passlib[bcrypt]==1.7.4
+bcrypt==4.0.1
