@@ -46,6 +46,51 @@
 // }
 
 
+// "use client";
+
+// import { useEffect, useState } from "react";
+// import { useRouter } from "next/navigation";
+// import Sidebar from "@/components/Sidebar";
+// import { getCurrentUser } from "@/lib/auth";
+// import { User } from "@/lib/types";
+// import { Loader2 } from "lucide-react";
+
+// export default function AppLayout({ children }: { children: React.ReactNode }) {
+//   const router = useRouter();
+//   const [user, setUser] = useState<User | null>(null);
+//   const [loading, setLoading] = useState(true);
+
+//   useEffect(() => {
+//     (async () => {
+//       const u = await getCurrentUser();
+//       if (!u) {
+//         router.replace("/login");
+//         return;
+//       }
+//       setUser(u);
+//       setLoading(false);
+//     })();
+//   }, [router]);
+
+//   if (loading) {
+//     return (
+//       <div className="flex flex-1 items-center justify-center min-h-screen bg-white dark:bg-zinc-950">
+//         <Loader2 className="w-6 h-6 animate-spin text-zinc-400" />
+//       </div>
+//     );
+//   }
+
+//   return (
+//     <div className="flex flex-1 min-h-screen bg-white dark:bg-zinc-950">
+//       {user && <Sidebar user={user} />}
+//       <main className="flex-1 overflow-y-auto">{children}</main>
+//     </div>
+//   );
+// }
+
+
+//v4:desktop and phone view
+
 "use client";
 
 import { useEffect, useState } from "react";
@@ -83,7 +128,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex flex-1 min-h-screen bg-white dark:bg-zinc-950">
       {user && <Sidebar user={user} />}
-      <main className="flex-1 overflow-y-auto">{children}</main>
+      <main className="flex-1 overflow-y-auto pb-20 md:pb-0">{children}</main>
     </div>
   );
 }

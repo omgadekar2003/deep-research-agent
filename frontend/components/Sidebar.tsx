@@ -147,7 +147,109 @@
 // }
 
 
-// v3:
+// v3: desktop sidebar with theme toggle
+
+
+// "use client";
+
+// import Link from "next/link";
+// import { usePathname, useRouter } from "next/navigation";
+// import { Plus, History, LogOut, Sparkles, Sun, Moon } from "lucide-react";
+// import { logoutUser } from "@/lib/auth";
+// import { User } from "@/lib/types";
+// import { useTheme } from "./ThemeProvider";
+
+// export default function Sidebar({ user }: { user: User }) {
+//   const pathname = usePathname();
+//   const router = useRouter();
+//   const { theme, toggleTheme } = useTheme();
+
+//   const links = [
+//     { href: "/app", label: "New Research", icon: Plus },
+//     { href: "/app/history", label: "History", icon: History },
+//   ];
+
+//   async function handleLogout() {
+//     await logoutUser();
+//     router.push("/login");
+//   }
+
+//   return (
+//     <aside className="w-64 shrink-0 border-r border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 flex flex-col h-screen sticky top-0">
+//       <div className="p-4 border-b border-zinc-200 dark:border-zinc-800">
+//         <Link href="/app" className="flex items-center gap-2 font-bold">
+//           <div className="p-1.5 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600">
+//             <Sparkles className="w-4 h-4 text-white" />
+//           </div>
+//           Deep Research
+//         </Link>
+//       </div>
+
+//       <nav className="flex-1 p-3 flex flex-col gap-1">
+//         {links.map((l) => {
+//           const Icon = l.icon;
+//           const active =
+//             pathname === l.href ||
+//             (l.href !== "/app" && pathname.startsWith(l.href));
+//           return (
+//             <Link
+//               key={l.href}
+//               href={l.href}
+//               className={`flex items-center gap-2.5 rounded-lg px-3 py-2.5 text-sm font-medium transition-all ${
+//                 active
+//                   ? "bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100"
+//                   : "text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:text-zinc-900 dark:hover:text-zinc-100"
+//               }`}
+//             >
+//               <Icon className="w-4 h-4" />
+//               {l.label}
+//             </Link>
+//           );
+//         })}
+//       </nav>
+
+//       <div className="p-3 border-t border-zinc-200 dark:border-zinc-800 space-y-1">
+//         {/* Theme toggle */}
+//         <button
+//           onClick={toggleTheme}
+//           className="flex items-center gap-2.5 w-full rounded-lg px-3 py-2 text-sm text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
+//           aria-label="Toggle theme"
+//         >
+//           {theme === "dark" ? (
+//             <>
+//               <Sun className="w-4 h-4" />
+//               Light mode
+//             </>
+//           ) : (
+//             <>
+//               <Moon className="w-4 h-4" />
+//               Dark mode
+//             </>
+//           )}
+//         </button>
+
+//         {/* User info */}
+//         <div className="px-2 py-1.5">
+//           <p className="text-xs text-zinc-500 truncate">{user.email}</p>
+//           {user.full_name && (
+//             <p className="text-sm font-medium truncate">{user.full_name}</p>
+//           )}
+//         </div>
+
+//         <button
+//           onClick={handleLogout}
+//           className="flex items-center gap-2.5 w-full rounded-lg px-3 py-2 text-sm text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
+//         >
+//           <LogOut className="w-4 h-4" />
+//           Log out
+//         </button>
+//       </div>
+//     </aside>
+//   );
+// }
+
+
+//v4: sidebar with phone and laptop view
 
 
 "use client";
@@ -165,7 +267,7 @@ export default function Sidebar({ user }: { user: User }) {
   const { theme, toggleTheme } = useTheme();
 
   const links = [
-    { href: "/app", label: "New Research", icon: Plus },
+    { href: "/app", label: "New", icon: Plus },
     { href: "/app/history", label: "History", icon: History },
   ];
 
@@ -175,75 +277,113 @@ export default function Sidebar({ user }: { user: User }) {
   }
 
   return (
-    <aside className="w-64 shrink-0 border-r border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 flex flex-col h-screen sticky top-0">
-      <div className="p-4 border-b border-zinc-200 dark:border-zinc-800">
-        <Link href="/app" className="flex items-center gap-2 font-bold">
-          <div className="p-1.5 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600">
-            <Sparkles className="w-4 h-4 text-white" />
-          </div>
-          Deep Research
-        </Link>
-      </div>
-
-      <nav className="flex-1 p-3 flex flex-col gap-1">
-        {links.map((l) => {
-          const Icon = l.icon;
-          const active =
-            pathname === l.href ||
-            (l.href !== "/app" && pathname.startsWith(l.href));
-          return (
-            <Link
-              key={l.href}
-              href={l.href}
-              className={`flex items-center gap-2.5 rounded-lg px-3 py-2.5 text-sm font-medium transition-all ${
-                active
-                  ? "bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100"
-                  : "text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:text-zinc-900 dark:hover:text-zinc-100"
-              }`}
-            >
-              <Icon className="w-4 h-4" />
-              {l.label}
-            </Link>
-          );
-        })}
-      </nav>
-
-      <div className="p-3 border-t border-zinc-200 dark:border-zinc-800 space-y-1">
-        {/* Theme toggle */}
-        <button
-          onClick={toggleTheme}
-          className="flex items-center gap-2.5 w-full rounded-lg px-3 py-2 text-sm text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
-          aria-label="Toggle theme"
-        >
-          {theme === "dark" ? (
-            <>
-              <Sun className="w-4 h-4" />
-              Light mode
-            </>
-          ) : (
-            <>
-              <Moon className="w-4 h-4" />
-              Dark mode
-            </>
-          )}
-        </button>
-
-        {/* User info */}
-        <div className="px-2 py-1.5">
-          <p className="text-xs text-zinc-500 truncate">{user.email}</p>
-          {user.full_name && (
-            <p className="text-sm font-medium truncate">{user.full_name}</p>
-          )}
+    <>
+      {/* ============ DESKTOP SIDEBAR (md and up) ============ */}
+      <aside className="hidden md:flex w-64 shrink-0 border-r border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 flex-col h-screen sticky top-0">
+        <div className="p-4 border-b border-zinc-200 dark:border-zinc-800">
+          <Link href="/app" className="flex items-center gap-2 font-bold">
+            <div className="p-1.5 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600">
+              <Sparkles className="w-4 h-4 text-white" />
+            </div>
+            Deep Research
+          </Link>
         </div>
 
-        <button
-          onClick={handleLogout}
-          className="flex items-center gap-2.5 w-full rounded-lg px-3 py-2 text-sm text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
-        >
-          <LogOut className="w-4 h-4" />
-          Log out
-        </button>
-      </div>
-    </aside>
+        <nav className="flex-1 p-3 flex flex-col gap-1">
+          {links.map((l) => {
+            const Icon = l.icon;
+            const active =
+              pathname === l.href ||
+              (l.href !== "/app" && pathname.startsWith(l.href));
+            return (
+              <Link
+                key={l.href}
+                href={l.href}
+                className={`flex items-center gap-2.5 rounded-lg px-3 py-2.5 text-sm font-medium transition-all ${
+                  active
+                    ? "bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100"
+                    : "text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:text-zinc-900 dark:hover:text-zinc-100"
+                }`}
+              >
+                <Icon className="w-4 h-4" />
+                {l.label === "New" ? "New Research" : l.label}
+              </Link>
+            );
+          })}
+        </nav>
+
+        <div className="p-3 border-t border-zinc-200 dark:border-zinc-800 space-y-1">
+          <button
+            onClick={toggleTheme}
+            className="flex items-center gap-2.5 w-full rounded-lg px-3 py-2 text-sm text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
+          >
+            {theme === "dark" ? (
+              <>
+                <Sun className="w-4 h-4" /> Light mode
+              </>
+            ) : (
+              <>
+                <Moon className="w-4 h-4" /> Dark mode
+              </>
+            )}
+          </button>
+
+          <div className="px-2 py-1.5">
+            <p className="text-xs text-zinc-500 truncate">{user.email}</p>
+            {user.full_name && (
+              <p className="text-sm font-medium truncate">{user.full_name}</p>
+            )}
+          </div>
+
+          <button
+            onClick={handleLogout}
+            className="flex items-center gap-2.5 w-full rounded-lg px-3 py-2 text-sm text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
+          >
+            <LogOut className="w-4 h-4" />
+            Log out
+          </button>
+        </div>
+      </aside>
+
+      {/* ============ MOBILE BOTTOM BAR (below md) ============ */}
+      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-40 border-t border-zinc-200 dark:border-zinc-800 bg-white/95 dark:bg-zinc-900/95 backdrop-blur pb-[env(safe-area-inset-bottom)]">
+        <div className="flex items-stretch justify-around">
+          {links.map((l) => {
+            const Icon = l.icon;
+            const active =
+              pathname === l.href ||
+              (l.href !== "/app" && pathname.startsWith(l.href));
+            return (
+              <Link
+                key={l.href}
+                href={l.href}
+                className={`flex-1 flex flex-col items-center gap-0.5 py-2.5 text-xs font-medium transition-colors ${
+                  active
+                    ? "text-blue-600 dark:text-blue-400"
+                    : "text-zinc-500 dark:text-zinc-400"
+                }`}
+              >
+                <Icon className="w-5 h-5" />
+                {l.label}
+              </Link>
+            );
+          })}
+          <button
+            onClick={toggleTheme}
+            className="flex-1 flex flex-col items-center gap-0.5 py-2.5 text-xs font-medium text-zinc-500 dark:text-zinc-400"
+          >
+            {theme === "dark" ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+            Theme
+          </button>
+          <button
+            onClick={handleLogout}
+            className="flex-1 flex flex-col items-center gap-0.5 py-2.5 text-xs font-medium text-zinc-500 dark:text-zinc-400"
+          >
+            <LogOut className="w-5 h-5" />
+            Logout
+          </button>
+        </div>
+      </nav>
+    </>
   );
 }
