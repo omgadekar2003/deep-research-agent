@@ -169,3 +169,4 @@ zstandard==0.25.0
 beautifulsoup4==4.12.3
 pypdf==5.1.0
 grpcio-status==1.62.3 # update
+reportlab==5.1.0
